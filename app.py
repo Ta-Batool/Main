@@ -8,7 +8,7 @@ app.register_blueprint(weather_bp)
 
 @app.route('/')
 def home():
-    return "Welcome to the Weather API!"
+    return "Welcome to the Weather API!<br>This gives you current weather data and air quality"
 
 if __name__ == '__main__':
     app.run(debug=True)
