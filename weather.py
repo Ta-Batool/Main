@@ -38,7 +38,8 @@ def get_weather():
         'latitude': lat,
         'longitude': lon,
         'current_weather': True,
-        'timezone': 'auto'  # Optional: to get the timezone of the location
+        'timezone': 'auto',  # Optional: to get the timezone of the location
+        'alerts': True  # Request alerts
     }
     
     response = requests.get(OPEN_METEO_URL, params=params)
@@ -52,7 +53,8 @@ def get_weather():
                 'description': data['current_weather'].get('weathercode', 'No description'),  # Handle missing descriptions
                 'wind_speed': data['current_weather'].get('windspeed', 'No wind speed data'),  # Safely access wind speed
                 'humidity': data['current_weather'].get('humidity', 'No humidity data'),  # Safely access humidity
-            }
+            },
+            'alerts': data.get('alerts', [])  # Extract alerts from the response
         }
         return jsonify(weather_info)
     else:
